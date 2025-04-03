@@ -2,6 +2,38 @@ import { groq } from "next-sanity";
 import { client } from "./lib/client";
 
 /**
+ * Fetch home page content
+ *
+ * Returns:
+ *   Object containing home page data including title, mainParagraph, and lastUpdated
+ *
+ * Raises:
+ *   Error: If the query fails or no home page is found
+ */
+export async function getHomePageContent() {
+  try {
+    const query = groq`
+      *[_type == "home"][0] {
+        title,
+        mainParagraph,
+        _updatedAt
+      }
+    `;
+
+    const homeData = await client.fetch(query);
+
+    if (!homeData) {
+      throw new Error("No home page content found");
+    }
+
+    return homeData;
+  } catch (error) {
+    console.error("Error fetching home page content:", error);
+    throw error;
+  }
+}
+
+/**
  * Fetch all thoughts ordered by publication date
  *
  * Returns:
