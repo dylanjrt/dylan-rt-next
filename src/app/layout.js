@@ -22,10 +22,10 @@ export default function RootLayout({ children }) {
         style={{ fontFamily: "var(--font-poppins), sans-serif" }}
       >
         <header className="sticky top-0 z-10 py-2">
-          <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="max-w-7xl mx-auto">
             <div className="flex justify-between h-30">
               <div className="flex">
-                <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                <div className="hidden sm:flex sm:space-x-8">
                   {/* Navigation items */}
                   <Link
                     href="/"
@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
                         className={`w-20 h-20 -mb-3 group-hover:fill-orange-200 group-hover:bg-gray-50 group-hover:border-1 stroke-2 stroke-gray-900 group-over:stroke-gray-700
               ${
                 pathname === "/"
-                  ? "animate-rotate-y fill-orange-200 stroke-gray-700"
+                  ? "fill-orange-200 stroke-gray-700"
                   : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +258,7 @@ export default function RootLayout({ children }) {
                         className={`w-20 h-20 -mb-3 group-hover:fill-orange-200 group-hover:bg-gray-50 group-hover:border-1 stroke-2 stroke-gray-900 group-over:stroke-gray-700
               ${
                 pathname === "/music"
-                  ? "animate-rotate-y fill-orange-200 stroke-gray-700"
+                  ? "fill-orange-200 stroke-gray-700"
                   : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
@@ -343,7 +343,7 @@ export default function RootLayout({ children }) {
                         className={`w-20 h-20 -mb-3 group-hover:fill-orange-200 group-hover:bg-gray-50 group-hover:border-1 stroke-2 stroke-gray-900 group-over:stroke-gray-700
               ${
                 pathname === "/visuals"
-                  ? "animate-rotate-y fill-orange-200 stroke-gray-700"
+                  ? "fill-orange-200 stroke-gray-700"
                   : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
@@ -431,7 +431,7 @@ export default function RootLayout({ children }) {
                         className={`w-20 h-20 -mb-3 group-hover:fill-orange-200 group-hover:bg-gray-50 group-hover:border-1 stroke-2 stroke-gray-900 group-over:stroke-gray-700
               ${
                 pathname === "/thoughts"
-                  ? "animate-rotate-y fill-orange-200 stroke-gray-700"
+                  ? "fill-orange-200 stroke-gray-700"
                   : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
@@ -571,12 +571,6 @@ export default function RootLayout({ children }) {
                   className="text-gray-500 hover:bg-gray-50 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Home
-                </Link>
-                <Link
-                  href="/about"
-                  className="text-gray-500 hover:bg-gray-50 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  About
                 </Link>
                 <Link
                   href="/music"
