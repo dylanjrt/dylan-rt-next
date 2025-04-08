@@ -5,10 +5,12 @@ import { useState, useRef, useEffect } from "react";
 export default function VideoPlayer({
   src,
   poster,
+  title,
   isEnlarged,
   onEnlarge,
   isPlaying,
   onPlayStateChange,
+  description,
 }) {
   const videoRef = useRef(null);
 
@@ -29,6 +31,13 @@ export default function VideoPlayer({
 
   return (
     <div className="relative cursor-pointer" onClick={togglePlay}>
+      {title && (
+        <div className="absolute top-0 left-0 right-0 text-center">
+          <span className="text-red-600 font-bold text-lg tracking-wider uppercase">
+            {title}
+          </span>
+        </div>
+      )}
       <video
         ref={videoRef}
         src={src}
@@ -72,6 +81,11 @@ export default function VideoPlayer({
           </svg>
         </div>
       </button>
+      {description && (
+        <div className="absolute bottom-2 left-2 text-white text-sm">
+          {description}
+        </div>
+      )}
     </div>
   );
 }
