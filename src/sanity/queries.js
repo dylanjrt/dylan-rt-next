@@ -118,7 +118,7 @@ export async function getThoughtBySlug(slug) {
 
 export async function getVideos() {
   try {
-    const query = `*[_type == "video"]{title, url}`;
+    const query = `*[_type == "video"]{title, description, url, poster}`;
 
     return await client.fetch(query);
   } catch (error) {
