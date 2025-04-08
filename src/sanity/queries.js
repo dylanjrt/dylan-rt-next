@@ -115,3 +115,14 @@ export async function getThoughtBySlug(slug) {
     return null;
   }
 }
+
+export async function getVideos() {
+  try {
+    const query = `*[_type == "video"]{title, url}`;
+
+    return await client.fetch(query);
+  } catch (error) {
+    console.error("Error fetching videos: %s", error.message);
+    return [];
+  }
+}
