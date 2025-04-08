@@ -118,7 +118,13 @@ export async function getThoughtBySlug(slug) {
 
 export async function getVideos() {
   try {
-    const query = `*[_type == "video"]{title, description, url, poster}`;
+    const query = `*[_type == "video"] | order(order asc) {
+      title,
+      description,
+      url,
+      poster,
+      order
+    }`;
 
     return await client.fetch(query);
   } catch (error) {
