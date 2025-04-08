@@ -5,9 +5,22 @@ import VideoPlayer from "@/components/VideoPlayer";
 
 export default function VideoGrid({ videos }) {
   const [enlargedVideo, setEnlargedVideo] = useState(null);
+  const [playingVideos, setPlayingVideos] = useState(new Set());
 
   const handleEnlarge = (src) => {
     setEnlargedVideo(enlargedVideo === src ? null : src);
+  };
+
+  const handlePlayStateChange = (src, isPlaying) => {
+    setPlayingVideos((prev) => {
+      const newSet = new Set(prev);
+      if (isPlaying) {
+        newSet.add(src);
+      } else {
+        newSet.delete(src);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -19,6 +32,10 @@ export default function VideoGrid({ videos }) {
               src={enlargedVideo}
               isEnlarged={true}
               onEnlarge={() => setEnlargedVideo(null)}
+              isPlaying={playingVideos.has(enlargedVideo)}
+              onPlayStateChange={(isPlaying) =>
+                handlePlayStateChange(enlargedVideo, isPlaying)
+              }
             />
           </div>
         </div>
@@ -33,6 +50,10 @@ export default function VideoGrid({ videos }) {
               src={video.url}
               poster={video.poster}
               onEnlarge={handleEnlarge}
+              isPlaying={playingVideos.has(video.url)}
+              onPlayStateChange={(isPlaying) =>
+                handlePlayStateChange(video.url, isPlaying)
+              }
             />
           </div>
         ))}
