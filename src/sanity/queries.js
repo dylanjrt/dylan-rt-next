@@ -13,22 +13,28 @@ import { client } from "./lib/client";
 export async function getHomePageContent() {
   try {
     const query = groq`
-      *[_type == "home"][0] {
-        title,
-        mainParagraph,
-        _updatedAt
+      {
+        "homeData": *[_type == "home"][0] {
+          title,
+          mainParagraph,
+          _updatedAt
+        },
+        "lastUpdated": *[_type in ["home", "thought", "music", "video"]] | order(_updatedAt desc)[0]._updatedAt
       }
     `;
 
-    const homeData = await client.fetch(query);
+    const result = await client.fetch(query);
 
-    if (!homeData) {
+    if (!result.homeData) {
       throw new Error("No home page content found");
     }
 
-    return homeData;
+    return {
+      ...result.homeData,
+      last_updated: result.lastUpdated,
+    };
   } catch (error) {
-    console.error("Error fetching home page content:", error);
+    console.error("Error fetching home page content: %s", error.message);
     throw error;
   }
 }
