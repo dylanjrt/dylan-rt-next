@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
               ${
                 pathname === "/"
                   ? "fill-orange-200 stroke-gray-700"
-                  : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
+                  : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -259,7 +259,7 @@ export default function RootLayout({ children }) {
               ${
                 pathname === "/music"
                   ? "fill-orange-200 stroke-gray-700"
-                  : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
+                  : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -344,7 +344,7 @@ export default function RootLayout({ children }) {
               ${
                 pathname === "/visuals"
                   ? "fill-orange-200 stroke-gray-700"
-                  : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
+                  : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -432,7 +432,7 @@ export default function RootLayout({ children }) {
               ${
                 pathname === "/thoughts"
                   ? "fill-orange-200 stroke-gray-700"
-                  : "fill-white group-hover:fill-white group-hover:stroke-gray-700"
+                  : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
               }`}
                         xmlns="http://www.w3.org/2000/svg"
                       >
