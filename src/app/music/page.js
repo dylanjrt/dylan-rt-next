@@ -75,25 +75,14 @@ export default async function Music() {
               </div>
 
               {/* Music player in a clean frame */}
-              <div className="border border-gray-300 rounded p-4 mb-8 bg-white mt-12">
+              <div className="rounded mb-8 mt-12">
                 <iframe
-                  style={{ border: "0", width: "100%", height: "120px" }}
+                  style={{ border: "0", width: "100%", height: "250px" }}
                   src={music.bandcampEmbed}
                   seamless
-                  title={`${music.title} by Dylan RT`}
+                  title={`${music.title} by ${music.artist}`}
                   allow="autoplay"
                 />
-              </div>
-
-              {/* Streaming links */}
-              <div className="flex gap-4 mb-8">
-                <a href="#" className="text-gray-800 hover:underline">
-                  Spotify
-                </a>
-                <span>-</span>
-                <a href="#" className="text-gray-800 hover:underline">
-                  Apple
-                </a>
               </div>
             </div>
           </div>
