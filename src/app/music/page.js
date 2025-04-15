@@ -31,7 +31,7 @@ export default async function Music() {
   }
 
   return (
-    <div className="container max-w-5xl mx-auto px-4 py-12">
+    <div className="container">
       {musicEntries.map((music, index) => {
         // First album gets lime, others get random colors
         const colorObj =
@@ -40,7 +40,7 @@ export default async function Music() {
             : brightColors[index % brightColors.length];
 
         return (
-          <div key={music._id} className={`my-24 ${index > 0 ? "mt-32" : ""}`}>
+          <div key={music._id} className={`my-8 ${index > 0 ? "mt-32" : ""}`}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Left column - Album artwork with decorative element */}
               <div className="relative">
@@ -82,31 +82,36 @@ export default async function Music() {
                   {/* Supplementary photos overlay on hover */}
                   {music.supplementaryPhotos &&
                     music.supplementaryPhotos.length > 0 && (
-                      <div
-                        className="invisible group-hover:visible absolute left-0 top-full mt-2 z-50 
-                                  rounded-lg p-4 
-                                 w-[800px] md:w-[1200px]"
-                      >
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                          {music.supplementaryPhotos.map((photo, index) => (
-                            <div key={index} className="relative">
-                              <Image
-                                src={photo.asset.url}
-                                alt={
-                                  photo.alt ||
-                                  `${music.title} photo ${index + 1}`
-                                }
-                                width={
-                                  photo.asset.metadata.dimensions.width * 3
-                                }
-                                height={
-                                  photo.asset.metadata.dimensions.height * 3
-                                }
-                              />
-                            </div>
-                          ))}
+                      <>
+                        {/* Background blur overlay */}
+                        <div className="fixed inset-0 bg-white/10 backdrop-blur-xs z-40 opacity-0 group-hover:opacity-100 invisible group-hover:visible pointer-events-none transition-all duration-300 ease-in-out" />
+
+                        <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute -left-96 mt-2 z-50 p-8 w-3xl h-3xl transition-all duration-300 ease-in-out">
+                          <div className="grid grid-cols-2 gap-16 items-center justify-center">
+                            {music.supplementaryPhotos.map((photo, index) => (
+                              <div
+                                key={index}
+                                className="relative shadow-2xl rounded-lg overflow-hidden"
+                              >
+                                <Image
+                                  src={photo.asset.url}
+                                  alt={
+                                    photo.alt ||
+                                    `${music.title} photo ${index + 1}`
+                                  }
+                                  width={
+                                    photo.asset.metadata.dimensions.width * 3
+                                  }
+                                  height={
+                                    photo.asset.metadata.dimensions.height * 3
+                                  }
+                                  className="transition-transform duration-300 hover:scale-105"
+                                />
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      </>
                     )}
                 </div>
 
@@ -126,7 +131,7 @@ export default async function Music() {
                 )}
 
                 {/* Decorative star element - matching album title color */}
-                <div className="absolute right-0 top-32 w-16 h-16">
+                <div className="absolute right-0 top-12 w-16 h-16">
                   <svg
                     viewBox="0 0 100 100"
                     className={`w-full h-full ${colorObj.fill}`}
@@ -147,8 +152,6 @@ export default async function Music() {
                 </div>
               </div>
             </div>
-
-            {/* No longer showing gallery since images are in hover overlay */}
 
             {index < musicEntries.length - 1 && (
               <hr className="mt-24 border-gray-200" />
