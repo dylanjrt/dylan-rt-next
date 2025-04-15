@@ -11,18 +11,63 @@ export default function VideoPlayer({
   isPlaying,
   onPlayStateChange,
   description,
+  initialTime = 0,
+  className = "",
 }) {
   const videoRef = useRef(null);
+  const [hasInitialized, setHasInitialized] = useState(false);
+  const previousPlayingRef = useRef(isPlaying);
 
   useEffect(() => {
     if (!videoRef.current) return;
 
-    if (isPlaying) {
-      videoRef.current.play();
-    } else {
+    // Set initial time when the component mounts, but only once
+    if (!hasInitialized && videoRef.current) {
+      videoRef.current.currentTime = initialTime;
+      setHasInitialized(true);
+    }
+
+    // Handle play/pause state changes
+    if (isPlaying && !previousPlayingRef.current) {
+      // Starting to play
+      videoRef.current.play().catch((error) => {
+        console.error("Error playing video:", error);
+        // Notify parent that playing failed
+        onPlayStateChange(false);
+      });
+    } else if (!isPlaying && previousPlayingRef.current) {
+      // Stopping playback
       videoRef.current.pause();
     }
-  }, [isPlaying]);
+
+    // Update previous playing state reference
+    previousPlayingRef.current = isPlaying;
+  }, [isPlaying, initialTime, hasInitialized, onPlayStateChange]);
+
+  // When component unmounts and remounts (like when closing enlarged view),
+  // we need to restore the playback state
+  useEffect(() => {
+    // This runs when the component mounts
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Set the current time from initialTime
+    video.currentTime = initialTime;
+
+    // If it should be playing, start playing
+    if (isPlaying) {
+      video.play().catch((error) => {
+        console.error("Error playing video on mount:", error);
+        onPlayStateChange(false);
+      });
+    }
+
+    // Cleanup function runs when component unmounts
+    return () => {
+      // We don't need to do anything special on unmount
+      // The playing state is maintained by the parent component
+    };
+  }, []); // Empty deps array means this runs only on mount/unmount
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -30,7 +75,10 @@ export default function VideoPlayer({
   };
 
   return (
-    <div className="relative cursor-pointer" onClick={togglePlay}>
+    <div
+      className={`relative cursor-pointer ${className}`}
+      onClick={togglePlay}
+    >
       {title && (
         <div className="absolute top-0 left-0 right-0 text-center">
           <span className="text-red-600 font-bold text-lg tracking-wider uppercase">
@@ -47,6 +95,7 @@ export default function VideoPlayer({
           aspectRatio: "400/300",
           objectFit: "cover",
         }}
+        data-video-src={src} // Add data attribute to easily find this video element
       />
       <button className="absolute top-1 left-1 rounded-full transition-all duration-200 group">
         {!isPlaying && (
