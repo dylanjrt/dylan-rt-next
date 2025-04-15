@@ -243,7 +243,7 @@ export default function RootLayout({ children }) {
                           strokeLinecap="round"
                         />
                       </svg>
-                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-white group-hover:bg-gray-50">
+                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-[#F6F9F5] group-hover:bg-gray-50">
                         HOME
                       </div>
                     </div>
@@ -328,7 +328,7 @@ export default function RootLayout({ children }) {
                           strokeLinecap="round"
                         />
                       </svg>
-                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-white group-hover:bg-gray-50">
+                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-[#F6F9F5] group-hover:bg-gray-50">
                         MUSIC
                       </div>
                     </div>
@@ -416,7 +416,7 @@ export default function RootLayout({ children }) {
                         />
                       </svg>
 
-                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-white group-hover:bg-gray-50">
+                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-[#F6F9F5] group-hover:bg-gray-50">
                         VISUALS
                       </div>
                     </div>
@@ -555,7 +555,7 @@ export default function RootLayout({ children }) {
                         />
                       </svg>
 
-                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-white group-hover:bg-gray-50">
+                      <div className="z-10 text-xs font-semibold text-gray-900 italic p-1 border-1 border-gray-900 bg-[#F6F9F5] group-hover:bg-gray-50">
                         THOUGHTS
                       </div>
                     </div>
