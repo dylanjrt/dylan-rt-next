@@ -1,6 +1,7 @@
 import { getMusic } from "@/sanity/queries";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+import { formatDateTime } from "../utils/dateFormat";
 
 export default async function Music() {
   const musicEntries = await getMusic();
@@ -14,81 +15,119 @@ export default async function Music() {
   }
 
   return (
-    <div className="container">
-      {musicEntries.map((music) => (
-        <div key={music._id} className="mb-12">
-          <h2 className="text-2xl font-bold mb-2">{music.title}</h2>
-          <p className="text-gray-600 mb-4">
-            Released: {new Date(music.releaseDate).toLocaleDateString()}
-          </p>
-
-          <div className="flex flex-col md:flex-row gap-8 mb-6">
-            {/* Album artwork and player */}
-            <div className="flex-shrink-0">
-              <div className="relative w-64 h-64 mb-4">
-                {music.albumCover && (
-                  <Image
-                    src={music.albumCover.asset.url}
-                    alt={`${music.title} album cover`}
-                    fill
-                    className="object-cover rounded-lg"
-                    sizes="(max-width: 768px) 100vw, 256px"
-                  />
-                )}
+    <div className="container max-w-5xl mx-auto px-4 py-12">
+      {musicEntries.map((music, index) => (
+        <div key={music._id} className={`my-24 ${index > 0 ? "mt-32" : ""}`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Left column - Album artwork with decorative element */}
+            <div className="relative">
+              {/* Decorative star element */}
+              <div className="absolute -top-12 -left-12 w-16 h-16 z-10">
+                <svg viewBox="0 0 100 100" className="w-full h-full fill-black">
+                  <path d="M50,0 L63,38 L100,50 L63,62 L50,100 L37,62 L0,50 L37,38 Z" />
+                </svg>
               </div>
 
-              <div className="bg-gray-200 rounded-lg p-4 border border-gray-400">
+              {/* Album cover with background */}
+              <div className="relative bg-cream pb-12">
+                <div className="relative w-full aspect-square">
+                  {music.albumCover && (
+                    <Image
+                      src={music.albumCover.asset.url}
+                      alt={`${music.title} album cover`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      priority
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Right column - Album info and player */}
+            <div className="relative">
+              {/* Album title in accent color */}
+              <h2 className="text-4xl font-light text-lime-500 mb-2">
+                {music.title}
+              </h2>
+
+              {/* Artist credits in italic */}
+              <p className="text-lg italic mb-6">{music.artist}</p>
+
+              {/* Released by text with links */}
+              <p className="mb-6">
+                {formatDateTime(music.releaseDate, "season")}
+              </p>
+
+              {/* Description with elegant typography */}
+              {music.description && (
+                <div className="prose prose-lg max-w-none mb-8 text-gray-800">
+                  <PortableText value={music.description} />
+                </div>
+              )}
+
+              {/* Decorative star element */}
+              <div className="absolute right-0 top-32 w-16 h-16">
+                <svg viewBox="0 0 100 100" className="w-full h-full fill-black">
+                  <path d="M50,0 L63,38 L100,50 L63,62 L50,100 L37,62 L0,50 L37,38 Z" />
+                </svg>
+              </div>
+
+              {/* Music player in a clean frame */}
+              <div className="border border-gray-300 rounded p-4 mb-8 bg-white mt-12">
                 <iframe
-                  style={{ border: "0", width: "100%", height: "241px" }}
+                  style={{ border: "0", width: "100%", height: "120px" }}
                   src={music.bandcampEmbed}
                   seamless
                   title={`${music.title} by Dylan RT`}
                   allow="autoplay"
                 />
               </div>
-            </div>
 
-            {/* Description */}
-            <div className="flex-grow">
-              {music.description && (
-                <div className="prose">
-                  <PortableText value={music.description} />
-                </div>
-              )}
-
-              {/* Supplementary photos */}
-              {music.supplementaryPhotos &&
-                music.supplementaryPhotos.length > 0 && (
-                  <div className="mt-6">
-                    <h3 className="text-xl font-semibold mb-3">Gallery</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {music.supplementaryPhotos.map((photo, index) => (
-                        <div key={index} className="relative">
-                          <div className="relative w-full h-48">
-                            <Image
-                              src={photo.asset.url}
-                              alt={
-                                photo.alt || `${music.title} photo ${index + 1}`
-                              }
-                              fill
-                              className="object-cover rounded-lg"
-                              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                            />
-                          </div>
-                          {photo.caption && (
-                            <p className="text-sm text-gray-600 mt-1">
-                              {photo.caption}
-                            </p>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+              {/* Streaming links */}
+              <div className="flex gap-4 mb-8">
+                <a href="#" className="text-gray-800 hover:underline">
+                  Spotify
+                </a>
+                <span>-</span>
+                <a href="#" className="text-gray-800 hover:underline">
+                  Apple
+                </a>
+              </div>
             </div>
           </div>
 
-          <hr className="my-8 border-gray-300" />
+          {/* Gallery - using a similar style to the reference */}
+          {music.supplementaryPhotos &&
+            music.supplementaryPhotos.length > 0 && (
+              <div className="mt-24">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {music.supplementaryPhotos.map((photo, index) => (
+                    <div key={index} className="relative">
+                      <div className="relative w-full aspect-square">
+                        <Image
+                          src={photo.asset.url}
+                          alt={photo.alt || `${music.title} photo ${index + 1}`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                        />
+                      </div>
+                      {photo.caption && (
+                        <p className="text-sm text-gray-600 mt-2">
+                          {photo.caption}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+          {index < musicEntries.length - 1 && (
+            <hr className="mt-24 border-gray-200" />
+          )}
         </div>
       ))}
     </div>

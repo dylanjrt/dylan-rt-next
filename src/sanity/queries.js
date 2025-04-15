@@ -131,6 +131,7 @@ export async function getMusic() {
       *[_type == "music"] | order(releaseDate desc) {
         _id,
         title,
+        artist,
         releaseDate,
         bandcampEmbed,
         albumCover {
