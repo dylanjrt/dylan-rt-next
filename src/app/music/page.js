@@ -86,8 +86,28 @@ export default async function Music() {
                         {/* Background blur overlay */}
                         <div className="fixed inset-0 bg-white/10 backdrop-blur-xs z-40 opacity-0 group-hover:opacity-100 invisible group-hover:visible pointer-events-none transition-all duration-300 ease-in-out" />
 
-                        <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute -left-96 mt-2 z-50 p-8 w-3xl h-3xl transition-all duration-300 ease-in-out">
-                          <div className="grid grid-cols-2 gap-16 items-center justify-center">
+                        <div
+                          className={`invisible group-hover:visible opacity-0 group-hover:opacity-100 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-all duration-300 ease-in-out ${
+                            music.supplementaryPhotos.length === 1
+                              ? "w-[500px]"
+                              : music.supplementaryPhotos.length === 2
+                                ? "w-[800px]"
+                                : music.supplementaryPhotos.length === 3
+                                  ? "w-[1100px]"
+                                  : "w-[1200px]"
+                          }`}
+                        >
+                          <div
+                            className={`grid gap-16 items-center justify-center ${
+                              music.supplementaryPhotos.length === 1
+                                ? "grid-cols-1"
+                                : music.supplementaryPhotos.length === 2
+                                  ? "grid-cols-2"
+                                  : music.supplementaryPhotos.length === 3
+                                    ? "grid-cols-3"
+                                    : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+                            }`}
+                          >
                             {music.supplementaryPhotos.map((photo, index) => (
                               <div
                                 key={index}
@@ -105,7 +125,6 @@ export default async function Music() {
                                   height={
                                     photo.asset.metadata.dimensions.height * 3
                                   }
-                                  className="transition-transform duration-300 hover:scale-105"
                                 />
                               </div>
                             ))}
@@ -143,7 +162,7 @@ export default async function Music() {
                 {/* Music player in a clean frame */}
                 <div className="rounded mb-8 mt-12">
                   <iframe
-                    style={{ border: "0", width: "100%", height: "250px" }}
+                    style={{ border: "0", width: "100%", height: "42px" }}
                     src={music.bandcampEmbed}
                     seamless
                     title={`${music.title} by ${music.artist}`}
