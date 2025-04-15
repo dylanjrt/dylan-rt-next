@@ -81,11 +81,11 @@ export default async function Music() {
               </div>
 
               {/* Artist credits in italic */}
-              <p className="text-lg italic mb-6">{music.artist}</p>
-
-              {/* Released by text with links */}
-              <p className="mb-6">
-                {formatDateTime(music.releaseDate, "season")}
+              <p className="text-xl mb-6">
+                {music.artist}
+                <span className="text-sm ml-2">
+                  {formatDateTime(music.releaseDate, "season")}
+                </span>
               </p>
 
               {/* Description with elegant typography */}
