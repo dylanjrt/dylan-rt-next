@@ -6,6 +6,22 @@ import { formatDateTime } from "../utils/dateFormat";
 export default async function Music() {
   const musicEntries = await getMusic();
 
+  // Array of bright colors for both titles and stars
+  const brightColors = [
+    { text: "text-pink-500", fill: "fill-pink-500" },
+    { text: "text-purple-500", fill: "fill-purple-500" },
+    { text: "text-indigo-500", fill: "fill-indigo-500" },
+    { text: "text-blue-500", fill: "fill-blue-500" },
+    { text: "text-cyan-500", fill: "fill-cyan-500" },
+    { text: "text-emerald-500", fill: "fill-emerald-500" },
+    { text: "text-amber-500", fill: "fill-amber-500" },
+    { text: "text-orange-500", fill: "fill-orange-500" },
+    { text: "text-fuchsia-500", fill: "fill-fuchsia-500" },
+    { text: "text-rose-500", fill: "fill-rose-500" },
+    { text: "text-violet-500", fill: "fill-violet-500" },
+    { text: "text-sky-500", fill: "fill-sky-500" },
+  ];
+
   if (!musicEntries || musicEntries.length === 0) {
     return (
       <div className="container">
@@ -16,112 +32,130 @@ export default async function Music() {
 
   return (
     <div className="container max-w-5xl mx-auto px-4 py-12">
-      {musicEntries.map((music, index) => (
-        <div key={music._id} className={`my-24 ${index > 0 ? "mt-32" : ""}`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Left column - Album artwork with decorative element */}
-            <div className="relative">
-              {/* Decorative star element */}
-              <div className="absolute -top-12 -left-12 w-16 h-16 z-10">
-                <svg viewBox="0 0 100 100" className="w-full h-full fill-black">
-                  <path d="M50,0 L63,38 L100,50 L63,62 L50,100 L37,62 L0,50 L37,38 Z" />
-                </svg>
-              </div>
+      {musicEntries.map((music, index) => {
+        // First album gets lime, others get random colors
+        const colorObj =
+          index === 0
+            ? { text: "text-lime-500", fill: "fill-lime-500" }
+            : brightColors[Math.floor(Math.random() * brightColors.length)];
 
-              {/* Album cover with background */}
-              <div className="relative bg-cream pb-12">
-                <div className="relative w-full aspect-square">
-                  {music.albumCover && (
-                    <Image
-                      src={music.albumCover.asset.url}
-                      alt={`${music.title} album cover`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      priority
-                    />
-                  )}
+        return (
+          <div key={music._id} className={`my-24 ${index > 0 ? "mt-32" : ""}`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {/* Left column - Album artwork with decorative element */}
+              <div className="relative">
+                {/* Decorative star element - matching album title color */}
+                <div className="absolute -top-12 -left-12 w-16 h-16 z-10">
+                  <svg
+                    viewBox="0 0 100 100"
+                    className={`w-full h-full ${colorObj.fill}`}
+                  >
+                    <path d="M50,0 L63,38 L100,50 L63,62 L50,100 L37,62 L0,50 L37,38 Z" />
+                  </svg>
+                </div>
+
+                {/* Album cover with background */}
+                <div className="relative bg-cream pb-12">
+                  <div className="relative w-full aspect-square">
+                    {music.albumCover && (
+                      <Image
+                        src={music.albumCover.asset.url}
+                        alt={`${music.title} album cover`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                        priority
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right column - Album info and player */}
-            <div className="relative">
-              {/* Album title with hover functionality for supplementary photos */}
-              <div className="group relative inline-block">
-                <h2 className="text-4xl font-light text-lime-500 mb-2">
-                  {music.title}
-                </h2>
-                {/* Supplementary photos overlay on hover */}
-                {music.supplementaryPhotos &&
-                  music.supplementaryPhotos.length > 0 && (
-                    <div
-                      className="invisible group-hover:visible absolute left-0 top-full mt-2 z-50 
-                                 rounded-lg p-4 
-                                w-[800px] md:w-[1200px]"
-                    >
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {music.supplementaryPhotos.map((photo, index) => (
-                          <div key={index} className="relative">
-                            <Image
-                              src={photo.asset.url}
-                              alt={
-                                photo.alt || `${music.title} photo ${index + 1}`
-                              }
-                              width={photo.asset.metadata.dimensions.width * 3}
-                              height={
-                                photo.asset.metadata.dimensions.height * 3
-                              }
-                            />
-                          </div>
-                        ))}
+              {/* Right column - Album info and player */}
+              <div className="relative">
+                {/* Album title with hover functionality for supplementary photos */}
+                <div className="group relative inline-block">
+                  <h2 className={`text-4xl font-light ${colorObj.text} mb-2`}>
+                    {music.title}
+                  </h2>
+
+                  {/* Supplementary photos overlay on hover */}
+                  {music.supplementaryPhotos &&
+                    music.supplementaryPhotos.length > 0 && (
+                      <div
+                        className="invisible group-hover:visible absolute left-0 top-full mt-2 z-50 
+                                  rounded-lg p-4 
+                                 w-[800px] md:w-[1200px]"
+                      >
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                          {music.supplementaryPhotos.map((photo, index) => (
+                            <div key={index} className="relative">
+                              <Image
+                                src={photo.asset.url}
+                                alt={
+                                  photo.alt ||
+                                  `${music.title} photo ${index + 1}`
+                                }
+                                width={
+                                  photo.asset.metadata.dimensions.width * 3
+                                }
+                                height={
+                                  photo.asset.metadata.dimensions.height * 3
+                                }
+                              />
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-              </div>
-
-              {/* Artist credits in italic */}
-              <p className="text-xl mb-6">
-                {music.artist}
-                <span className="text-sm ml-2">
-                  {formatDateTime(music.releaseDate, "season")}
-                </span>
-              </p>
-
-              {/* Description with elegant typography */}
-              {music.description && (
-                <div className="prose prose-lg max-w-none mb-8 text-gray-800">
-                  <PortableText value={music.description} />
+                    )}
                 </div>
-              )}
 
-              {/* Decorative star element */}
-              <div className="absolute right-0 top-32 w-16 h-16">
-                <svg viewBox="0 0 100 100" className="w-full h-full fill-black">
-                  <path d="M50,0 L63,38 L100,50 L63,62 L50,100 L37,62 L0,50 L37,38 Z" />
-                </svg>
-              </div>
+                {/* Artist credits in italic */}
+                <p className="text-xl mb-6">
+                  {music.artist}
+                  <span className="text-sm ml-2">
+                    {formatDateTime(music.releaseDate, "season")}
+                  </span>
+                </p>
 
-              {/* Music player in a clean frame */}
-              <div className="rounded mb-8 mt-12">
-                <iframe
-                  style={{ border: "0", width: "100%", height: "250px" }}
-                  src={music.bandcampEmbed}
-                  seamless
-                  title={`${music.title} by ${music.artist}`}
-                  allow="autoplay"
-                />
+                {/* Description with elegant typography */}
+                {music.description && (
+                  <div className="prose prose-lg max-w-none mb-8 text-gray-800">
+                    <PortableText value={music.description} />
+                  </div>
+                )}
+
+                {/* Decorative star element - matching album title color */}
+                <div className="absolute right-0 top-32 w-16 h-16">
+                  <svg
+                    viewBox="0 0 100 100"
+                    className={`w-full h-full ${colorObj.fill}`}
+                  >
+                    <path d="M50,0 L63,38 L100,50 L63,62 L50,100 L37,62 L0,50 L37,38 Z" />
+                  </svg>
+                </div>
+
+                {/* Music player in a clean frame */}
+                <div className="rounded mb-8 mt-12">
+                  <iframe
+                    style={{ border: "0", width: "100%", height: "250px" }}
+                    src={music.bandcampEmbed}
+                    seamless
+                    title={`${music.title} by ${music.artist}`}
+                    allow="autoplay"
+                  />
+                </div>
               </div>
             </div>
+
+            {/* No longer showing gallery since images are in hover overlay */}
+
+            {index < musicEntries.length - 1 && (
+              <hr className="mt-24 border-gray-200" />
+            )}
           </div>
-
-          {/* No longer showing gallery since images are in hover overlay */}
-
-          {index < musicEntries.length - 1 && (
-            <hr className="mt-24 border-gray-200" />
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
