@@ -47,10 +47,38 @@ export default async function Music() {
 
             {/* Right column - Album info and player */}
             <div className="relative">
-              {/* Album title in accent color */}
-              <h2 className="text-4xl font-light text-lime-500 mb-2">
-                {music.title}
-              </h2>
+              {/* Album title with hover functionality for supplementary photos */}
+              <div className="group relative inline-block">
+                <h2 className="text-4xl font-light text-lime-500 mb-2">
+                  {music.title}
+                </h2>
+                {/* Supplementary photos overlay on hover */}
+                {music.supplementaryPhotos &&
+                  music.supplementaryPhotos.length > 0 && (
+                    <div
+                      className="invisible group-hover:visible absolute left-0 top-full mt-2 z-50 
+                                 rounded-lg p-4 
+                                w-[800px] md:w-[1200px]"
+                    >
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {music.supplementaryPhotos.map((photo, index) => (
+                          <div key={index} className="relative">
+                            <Image
+                              src={photo.asset.url}
+                              alt={
+                                photo.alt || `${music.title} photo ${index + 1}`
+                              }
+                              width={photo.asset.metadata.dimensions.width * 3}
+                              height={
+                                photo.asset.metadata.dimensions.height * 3
+                              }
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+              </div>
 
               {/* Artist credits in italic */}
               <p className="text-lg italic mb-6">{music.artist}</p>
@@ -87,32 +115,7 @@ export default async function Music() {
             </div>
           </div>
 
-          {/* Gallery - using a similar style to the reference */}
-          {music.supplementaryPhotos &&
-            music.supplementaryPhotos.length > 0 && (
-              <div className="mt-24">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {music.supplementaryPhotos.map((photo, index) => (
-                    <div key={index} className="relative">
-                      <div className="relative w-full aspect-square">
-                        <Image
-                          src={photo.asset.url}
-                          alt={photo.alt || `${music.title} photo ${index + 1}`}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                        />
-                      </div>
-                      {photo.caption && (
-                        <p className="text-sm text-gray-600 mt-2">
-                          {photo.caption}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+          {/* No longer showing gallery since images are in hover overlay */}
 
           {index < musicEntries.length - 1 && (
             <hr className="mt-24 border-gray-200" />
