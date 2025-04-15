@@ -31,7 +31,7 @@ export default async function Music() {
   }
 
   return (
-    <div className="container">
+    <div className="w-full">
       {musicEntries.map((music, index) => {
         // First album gets lime, others get random colors
         const colorObj =
@@ -40,7 +40,10 @@ export default async function Music() {
             : brightColors[index % brightColors.length];
 
         return (
-          <div key={music._id} className={`my-8 ${index > 0 ? "mt-32" : ""}`}>
+          <div
+            key={music._id}
+            className={`my-8 ${index > 0 ? "mt-32" : ""} max-w-full`}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Left column - Album artwork with decorative element */}
               <div className="relative">
@@ -142,7 +145,7 @@ export default async function Music() {
                 </p>
 
                 {/* Music player in a clean frame */}
-                <div className="rounded mb-8">
+                <div className="rounded mb-4">
                   <iframe
                     style={{ border: "0", width: "100%", height: "42px" }}
                     src={music.bandcampEmbed}
