@@ -134,13 +134,23 @@ export default async function Music() {
                     )}
                 </div>
 
-                {/* Artist credits in italic */}
-                <p className="text-xl mb-6">
+                <p className="text-xl mb-4">
                   {music.artist}
                   <span className="text-sm ml-2">
                     {formatDateTime(music.releaseDate, "season")}
                   </span>
                 </p>
+
+                {/* Music player in a clean frame */}
+                <div className="rounded mb-8">
+                  <iframe
+                    style={{ border: "0", width: "100%", height: "42px" }}
+                    src={music.bandcampEmbed}
+                    seamless
+                    title={`${music.title} by ${music.artist}`}
+                    allow="autoplay"
+                  />
+                </div>
 
                 {/* Description with elegant typography */}
                 {music.description && (
@@ -157,17 +167,6 @@ export default async function Music() {
                   >
                     <path d="M50,0 L63,38 L100,50 L63,62 L50,100 L37,62 L0,50 L37,38 Z" />
                   </svg>
-                </div>
-
-                {/* Music player in a clean frame */}
-                <div className="rounded mb-8 mt-12">
-                  <iframe
-                    style={{ border: "0", width: "100%", height: "42px" }}
-                    src={music.bandcampEmbed}
-                    seamless
-                    title={`${music.title} by ${music.artist}`}
-                    allow="autoplay"
-                  />
                 </div>
               </div>
             </div>
