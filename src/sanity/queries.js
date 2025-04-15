@@ -116,6 +116,54 @@ export async function getThoughtBySlug(slug) {
   }
 }
 
+/**
+ * Fetch all music entries ordered by release date (newest first)
+ *
+ * Returns:
+ *   Array of music objects with all fields including album cover and supplementary photos
+ *
+ * Raises:
+ *   Error: If the query fails
+ */
+export async function getMusic() {
+  try {
+    const query = groq`
+      *[_type == "music"] | order(releaseDate desc) {
+        _id,
+        title,
+        releaseDate,
+        bandcampEmbed,
+        albumCover {
+          asset-> {
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          }
+        },
+        description,
+        supplementaryPhotos[] {
+          asset-> {
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          },
+          caption,
+          alt
+        }
+      }
+    `;
+
+    return await client.fetch(query);
+  } catch (error) {
+    console.error("Error fetching music: %s", error.message);
+    return [];
+  }
+}
+
 export async function getVideos() {
   try {
     const query = `*[_type == "video"] | order(order asc) {
