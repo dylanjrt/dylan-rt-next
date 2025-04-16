@@ -12,23 +12,28 @@ export default async function Home() {
   const homeData = await getHomePageContent();
 
   return (
-    <div className="flex p-6 w-6xl gap-16">
-      <div>
+    <div className="flex flex-col md:flex-row p-4 sm:p-6 w-full max-w-6xl gap-8 md:gap-16">
+      <div className="w-full md:w-1/2">
         {homeData.image && (
           <>
-            <Image
-              src={homeData.image.asset.url}
-              alt="Home page image"
-              width={1136}
-              height={1136}
-            />
+            <div className="relative w-full">
+              <Image
+                src={homeData.image.asset.url}
+                alt="Home page image"
+                width={1136}
+                height={1136}
+                className="w-full h-auto"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
             <div className="text-sm italic text-gray-500 mt-2">
               {homeData.image.caption}
             </div>
           </>
         )}
       </div>
-      <div className="mt-8">
+      <div className="mt-4 md:mt-8 w-full md:w-1/2">
         <PortableText value={homeData.mainParagraph} components={components} />
         <div className="text-sm text-gray-500 mt-8">
           last updated: {formatDateTime(homeData.lastUpdated)}
