@@ -21,11 +21,8 @@ export function formatDateTime(dateString, format = "default") {
     if (format === "season") {
       const month = date.getMonth();
       const year = date.getFullYear();
-      const fullDate = date.toISOString();
-      console.log(fullDate);
 
       let season;
-      console.log(month);
       // Northern hemisphere seasons by meteorological definition
       if (month >= 2 && month <= 4) {
         season = "Spring";
