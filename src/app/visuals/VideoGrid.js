@@ -105,7 +105,7 @@ export default function VideoGrid({ videos }) {
         {videos.map((video, index) => (
           <div
             key={video._id || index}
-            className="h-max relative overflow-hidden rounded-lg shadow-lg mb-6 sm:mb-0"
+            className="h-max relative overflow-hidden shadow-lg mb-6 sm:mb-0"
           >
             {/* Only render the grid video if it's not the enlarged one */}
             {video.url !== enlargedVideo && (
