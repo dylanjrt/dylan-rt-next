@@ -10,7 +10,6 @@ import Image from "next/image";
 
 export default async function Home() {
   const homeData = await getHomePageContent();
-  console.log(homeData);
 
   return (
     <div className="flex p-6 w-6xl gap-16">
