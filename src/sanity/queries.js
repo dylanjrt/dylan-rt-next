@@ -17,6 +17,16 @@ export async function getHomePageContent() {
         "homeData": *[_type == "home"][0] {
           title,
           mainParagraph,
+          image {
+            caption,
+            asset-> {
+              _id,
+              url,
+              metadata {
+                dimensions
+              }
+            }
+          },
           _updatedAt
         },
         "lastUpdated": *[_type in ["home", "thought", "music", "video"]] | order(_updatedAt desc)[0]._updatedAt
@@ -31,7 +41,7 @@ export async function getHomePageContent() {
 
     return {
       ...result.homeData,
-      last_updated: result.lastUpdated,
+      lastUpdated: result.lastUpdated,
     };
   } catch (error) {
     console.error("Error fetching home page content: %s", error.message);
