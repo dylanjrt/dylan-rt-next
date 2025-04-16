@@ -97,14 +97,33 @@ export default function VideoPlayer({
         }}
         data-video-src={src} // Add data attribute to easily find this video element
       />
-      <button className="absolute top-1 left-1 rounded-full transition-all duration-200 group">
+      <button
+        className="absolute top-0 left-0 w-10 h-10 flex items-center justify-center transition-all duration-200 group"
+        aria-label="Play video"
+        onClick={(e) => {
+          e.stopPropagation();
+          togglePlay();
+        }}
+      >
         {!isPlaying && (
           <svg
-            className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-all duration-200"
+            className="w-6 h-6 opacity-50 group-hover:opacity-100 transition-all duration-200"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M8 5v14l11-7z" fill="white" />
+          </svg>
+        )}
+        {isPlaying && (
+          <svg
+            className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-all duration-200"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="white"
+          >
+            <rect x="6" y="4" width="4" height="16" fill="white" />
+            <rect x="14" y="4" width="4" height="16" fill="white" />
           </svg>
         )}
       </button>
@@ -113,14 +132,14 @@ export default function VideoPlayer({
           e.stopPropagation();
           onEnlarge(src);
         }}
-        className="absolute top-2 right-2 rounded-full hover:bg-black transition-all duration-200 group"
+        className="absolute top-2 right-2 flex items-center justify-center transition-all duration-200 group"
         aria-label="Toggle size"
       >
-        <div className="w-5 h-5 flex items-center justify-center">
+        <div className="w-6 h-6 flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
-            className={`w-4 h-4 fill-white opacity-50 group-hover:opacity-100 transition-all duration-200`}
+            className={`w-5 h-5 fill-white opacity-50 group-hover:opacity-100 transition-all duration-200`}
           >
             {isEnlarged ? (
               <path d="M200-200v-400h80v264l464-464 56 56-464 464h264v80H200Z" />
@@ -131,7 +150,7 @@ export default function VideoPlayer({
         </div>
       </button>
       {description && (
-        <div className="absolute bottom-2 left-2 text-white text-sm">
+        <div className="absolute bottom-0 left-0 right-0 text-white text-xs sm:text-sm p-2 bg-black/50">
           {description}
         </div>
       )}
