@@ -85,7 +85,7 @@ export default function VideoGrid({ videos }) {
   return (
     <div className="relative">
       {enlargedVideo && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-75 flex items-center justify-center p-8">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-75 flex items-center justify-center p-4 sm:p-8">
           <div className="relative w-full max-w-6xl">
             <VideoPlayer
               src={enlargedVideo}
@@ -101,11 +101,11 @@ export default function VideoGrid({ videos }) {
           </div>
         </div>
       )}
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
         {videos.map((video, index) => (
           <div
             key={video._id || index}
-            className="h-max relative overflow-hidden rounded-lg shadow-lg"
+            className="h-max relative overflow-hidden rounded-lg shadow-lg mb-6 sm:mb-0"
           >
             {/* Only render the grid video if it's not the enlarged one */}
             {video.url !== enlargedVideo && (
