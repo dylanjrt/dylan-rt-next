@@ -160,6 +160,7 @@ export async function getMusic() {
           }
         },
         description,
+        credits,
         supplementaryPhotos[] {
           asset-> {
             _id,

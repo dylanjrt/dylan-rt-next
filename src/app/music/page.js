@@ -165,6 +165,12 @@ export default async function Music() {
                   </div>
                 )}
 
+                {music.credits && (
+                  <div className="prose prose-sm md:prose-lg max-w-none mb-8 text-gray-800 text-sm font-light">
+                    <PortableText value={music.credits} />
+                  </div>
+                )}
+
                 {/* Decorative star element - matching album title color */}
                 <div className="absolute right-0 top-4 md:top-12 w-10 h-10 md:w-16 md:h-16">
                   <svg
