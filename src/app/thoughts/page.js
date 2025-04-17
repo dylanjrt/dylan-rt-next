@@ -7,6 +7,9 @@ import { getThoughts } from "@/sanity/queries";
  * Returns:
  *   JSX for the thoughts listing page
  */
+
+export const revalidate = 300;
+
 export default async function ThoughtsPage() {
   const thoughts = await getThoughts();
 
