@@ -42,7 +42,7 @@ export default async function Music() {
         return (
           <div
             key={music._id}
-            className={`my-8 ${index > 0 ? "mt-16 md:mt-32" : ""} max-w-full`}
+            className={`my-8 ${index > 0 ? "mt-24" : ""} max-w-full`}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
               {/* Left column - Album artwork with decorative element */}
@@ -184,7 +184,7 @@ export default async function Music() {
             </div>
 
             {index < musicEntries.length - 1 && (
-              <hr className="mt-12 md:mt-24 border-gray-200" />
+              <hr className="mt-12 border-gray-200" />
             )}
           </div>
         );
