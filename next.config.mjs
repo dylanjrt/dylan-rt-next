@@ -20,6 +20,15 @@ const nextConfig = {
       },
     ],
   },
+
+  // Add global revalidation settings
+  experimental: {
+    // Defaults for all pages
+    serverActions: {
+      // Default revalidation time for all routes in seconds
+      defaultRevalidation: 300, // 5 minutes
+    },
+  },
 };
 
 export default nextConfig;

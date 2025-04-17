@@ -3,8 +3,6 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { formatDateTime } from "../utils/dateFormat";
 
-export const revalidate = 100;
-
 export default async function Music() {
   const musicEntries = await getMusic();
 

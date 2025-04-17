@@ -8,8 +8,6 @@ import Image from "next/image";
 //   loading: () => <div className="h-[400px] w-full bg-gray-100" />,
 // });
 
-export const revalidate = 100;
-
 export default async function Home() {
   const homeData = await getHomePageContent();
 
