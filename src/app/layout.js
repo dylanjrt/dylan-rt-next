@@ -3,15 +3,7 @@
 import { usePathname } from "next/navigation";
 import "./globals.css";
 import Link from "next/link";
-import { Poppins } from "next/font/google";
 import { useState, useEffect } from "react";
-
-// Load Poppins
-const poppins = Poppins({
-  weight: ["300", "400", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-});
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -30,10 +22,7 @@ export default function RootLayout({ children }) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
         />
       </head>
-      <body
-        className={`${poppins.variable} antialiased`}
-        style={{ fontFamily: "var(--font-poppins), sans-serif" }}
-      >
+      <body className="antialiased font-sans selection:text-gray-800 selection:bg-purple-100">
         <header className="sticky top-0 z-10 py-2">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-auto">
