@@ -28,7 +28,7 @@ export const components = {
   },
   block: {
     normal: ({ children }) => (
-      <p className="mb-4 text-base sm:text-lg">{children}</p>
+      <p className="mb-4 text-base sm:text-md">{children}</p>
     ),
     h1: ({ children }) => (
       <h1 className="text-3xl sm:text-4xl font-bold mt-8 mb-4">{children}</h1>

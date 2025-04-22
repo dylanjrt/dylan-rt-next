@@ -127,9 +127,7 @@ export default async function Music() {
               <div className="relative mt-6 md:mt-0">
                 {/* Album title with hover functionality for supplementary photos */}
                 <div className="group relative inline-block">
-                  <h2
-                    className={`text-2xl md:text-4xl font-light ${colorObj.text} mb-2`}
-                  >
+                  <h2 className={`text-2xl md:text-4xl ${colorObj.text} mb-2`}>
                     {music.title}
                   </h2>
 
@@ -215,7 +213,7 @@ export default async function Music() {
                 )}
 
                 {music.credits && (
-                  <div className="prose prose-sm md:prose-lg max-w-none mb-8 text-gray-800 text-sm font-light">
+                  <div className="prose prose-sm md:prose-lg max-w-none mb-8 text-gray-600 text-sm">
                     <PortableText value={music.credits} />
                   </div>
                 )}
