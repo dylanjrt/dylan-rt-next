@@ -10,18 +10,66 @@ export default async function Music() {
 
   // Array of bright colors for both titles and stars
   const brightColors = [
-    { text: "text-emerald-500", fill: "fill-emerald-500" },
-    { text: "text-pink-500", fill: "fill-pink-500" },
-    { text: "text-orange-500", fill: "fill-orange-500" },
-    { text: "text-purple-500", fill: "fill-purple-500" },
-    { text: "text-indigo-500", fill: "fill-indigo-500" },
-    { text: "text-cyan-500", fill: "fill-cyan-500" },
-    { text: "text-blue-500", fill: "fill-blue-500" },
-    { text: "text-amber-500", fill: "fill-amber-500" },
-    { text: "text-fuchsia-500", fill: "fill-fuchsia-500" },
-    { text: "text-rose-500", fill: "fill-rose-500" },
-    { text: "text-violet-500", fill: "fill-violet-500" },
-    { text: "text-sky-500", fill: "fill-sky-500" },
+    {
+      text: "text-lime-500",
+      fill: "fill-lime-500",
+      selectionBg: "[&_*::selection]:bg-lime-200",
+    },
+    {
+      text: "text-pink-500",
+      fill: "fill-pink-500",
+      selectionBg: "[&_*::selection]:bg-pink-200",
+    },
+    {
+      text: "text-orange-500",
+      fill: "fill-orange-500",
+      selectionBg: "[&_*::selection]:bg-orange-200",
+    },
+    {
+      text: "text-purple-500",
+      fill: "fill-purple-500",
+      selectionBg: "[&_*::selection]:bg-purple-200",
+    },
+    {
+      text: "text-indigo-500",
+      fill: "fill-indigo-500",
+      selectionBg: "[&_*::selection]:bg-indigo-200",
+    },
+    {
+      text: "text-cyan-500",
+      fill: "fill-cyan-500",
+      selectionBg: "[&_*::selection]:bg-cyan-200",
+    },
+    {
+      text: "text-blue-500",
+      fill: "fill-blue-500",
+      selectionBg: "[&_*::selection]:bg-blue-200",
+    },
+    {
+      text: "text-amber-500",
+      fill: "fill-amber-500",
+      selectionBg: "[&_*::selection]:bg-amber-200",
+    },
+    {
+      text: "text-fuchsia-500",
+      fill: "fill-fuchsia-500",
+      selectionBg: "[&_*::selection]:bg-fuchsia-200",
+    },
+    {
+      text: "text-rose-500",
+      fill: "fill-rose-500",
+      selectionBg: "[&_*::selection]:bg-rose-200",
+    },
+    {
+      text: "text-violet-500",
+      fill: "fill-violet-500",
+      selectionBg: "[&_*::selection]:bg-violet-200",
+    },
+    {
+      text: "text-sky-500",
+      fill: "fill-sky-500",
+      selectionBg: "[&_*::selection]:bg-sky-200",
+    },
   ];
 
   if (!musicEntries || musicEntries.length === 0) {
@@ -36,17 +84,16 @@ export default async function Music() {
     <div className="w-full">
       {musicEntries.map((music, index) => {
         // First album gets lime, others get random colors
-        const colorObj =
-          index === 0
-            ? { text: "text-lime-500", fill: "fill-lime-500" }
-            : brightColors[index % brightColors.length];
+        const colorObj = brightColors[index % brightColors.length];
 
         return (
           <div
             key={music._id}
             className={`my-8 ${index > 0 ? "mt-24" : ""} max-w-full`}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+            <div
+              className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 ${colorObj.selectionBg}`}
+            >
               {/* Left column - Album artwork with decorative element */}
               <div className="relative">
                 {/* Decorative star element - matching album title color */}
