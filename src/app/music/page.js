@@ -109,15 +109,20 @@ export default async function Music() {
                 {/* Album cover with background */}
                 <div className="relative bg-cream pb-8 md:pb-12">
                   <div className="relative w-full aspect-square">
-                    {music.albumCover && (
-                      <Image
-                        src={music.albumCover.asset.url}
-                        alt={`${music.title} album cover`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 40vw"
-                        priority
-                      />
+                    {music.albumCover ? (
+                      <>
+                        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+                        <Image
+                          src={music.albumCover.asset.url}
+                          alt={`${music.title} album cover`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 40vw"
+                          priority
+                        />
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 bg-gray-200 animate-pulse" />
                     )}
                   </div>
                 </div>
