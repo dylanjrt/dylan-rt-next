@@ -36,8 +36,11 @@ export default async function Home() {
         )}
       </div>
       <div className="mt-4 md:mt-8 w-full md:w-1/2">
+        <h2 className="text-2xl md:text-4xl mb-8 text-[#c17fb5]">
+          {homeData.title}
+        </h2>
         <PortableText value={homeData.mainParagraph} components={components} />
-        <div className="text-sm text-gray-500 mt-8">
+        <div className="text-xs text-gray-500 mt-8">
           last updated: {formatDateTime(homeData.lastUpdated)}
         </div>
       </div>
