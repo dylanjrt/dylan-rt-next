@@ -184,15 +184,24 @@ export async function getMusic() {
 
 export async function getVideos() {
   try {
-    const query = `*[_type == "video"] | order(order asc) {
+    const query = `*[_type == "visual"] | order(order asc) {
       title,
-      description,
+      caption,
       url,
-      poster,
+      thumbnail {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      },
       order
     }`;
-
-    return await client.fetch(query);
+    const response = await client.fetch(query);
+    console.log(response);
+    return response;
   } catch (error) {
     console.error("Error fetching videos: %s", error.message);
     return [];

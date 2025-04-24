@@ -111,7 +111,7 @@ export default function VideoGrid({ videos }) {
             {video.url !== enlargedVideo && (
               <VideoPlayer
                 src={video.url}
-                poster={video.poster}
+                poster={video.thumbnail.asset.url}
                 onEnlarge={() => handleEnlarge(video.url)}
                 isPlaying={playingVideos.has(video.url)}
                 onPlayStateChange={(isPlaying) =>
