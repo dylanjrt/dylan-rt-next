@@ -107,7 +107,6 @@ export default function VideoPlayer({
             aspectRatio: "400/300",
             objectFit: "cover",
             position: "relative",
-            zIndex: "10",
           }}
           data-video-src={src}
           onLoadedData={handleVideoLoaded}
