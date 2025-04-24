@@ -16,6 +16,7 @@ export default function VideoPlayer({
 }) {
   const videoRef = useRef(null);
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const previousPlayingRef = useRef(isPlaying);
 
   useEffect(() => {
@@ -74,6 +75,10 @@ export default function VideoPlayer({
     onPlayStateChange(!isPlaying);
   };
 
+  const handleVideoLoaded = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div
       className={`relative cursor-pointer ${className}`}
@@ -86,17 +91,28 @@ export default function VideoPlayer({
           </span>
         </div>
       )}
-      <video
-        ref={videoRef}
-        src={src}
-        poster={poster}
-        className="w-full"
-        style={{
-          aspectRatio: "400/300",
-          objectFit: "cover",
-        }}
-        data-video-src={src} // Add data attribute to easily find this video element
-      />
+      <div className="rounded overflow-hidden relative">
+        {isLoading && (
+          <div
+            className="absolute inset-0 bg-gray-100 animate-pulse"
+            style={{ aspectRatio: "400/300" }}
+          ></div>
+        )}
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          className="w-full"
+          style={{
+            aspectRatio: "400/300",
+            objectFit: "cover",
+            position: "relative",
+            zIndex: "10",
+          }}
+          data-video-src={src}
+          onLoadedData={handleVideoLoaded}
+        />
+      </div>
       <button
         className="absolute top-0 left-0 w-10 h-10 flex items-center justify-center transition-all duration-200 group"
         aria-label="Play video"
