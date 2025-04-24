@@ -97,7 +97,7 @@ export default async function Music() {
               {/* Left column - Album artwork with decorative element */}
               <div className="relative">
                 {/* Decorative star element - matching album title color */}
-                <div className="absolute -top-6 -left-6 md:-top-12 md:-left-12 w-10 h-10 md:w-16 md:h-16 z-10">
+                <div className="absolute -top-6 -left-6 md:-top-12 md:-left-12 w-10 h-10 md:w-16 md:h-16 z-50">
                   <svg
                     viewBox="0 0 100 100"
                     className={`w-full h-full ${colorObj.fill}`}
@@ -200,9 +200,16 @@ export default async function Music() {
                 </p>
 
                 {/* Music player in a clean frame */}
-                <div className="rounded mb-4 w-full overflow-hidden">
+                <div className="rounded-l mb-4 w-full overflow-hidden relative">
+                  <div className="absolute inset-0 bg-gray-100 border-2 border-gray-200 animate-pulse"></div>
                   <iframe
-                    style={{ border: "0", width: "100%", height: "42px" }}
+                    style={{
+                      border: "1",
+                      width: "100%",
+                      height: "42px",
+                      position: "relative",
+                      zIndex: "10",
+                    }}
                     src={music.bandcampEmbed}
                     seamless
                     title={`${music.title} by ${music.artist}`}
@@ -224,7 +231,7 @@ export default async function Music() {
                 )}
 
                 {/* Decorative star element - matching album title color */}
-                <div className="absolute right-0 top-4 md:top-12 w-10 h-10 md:w-16 md:h-16">
+                <div className="absolute right-0 top-4 md:top-12 w-10 h-10 md:w-16 md:h-16 z-50">
                   <svg
                     viewBox="0 0 100 100"
                     className={`w-full h-full ${colorObj.fill}`}
