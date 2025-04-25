@@ -2,7 +2,7 @@ import { getMusic } from "@/sanity/queries";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { formatDateTime } from "../utils/dateFormat";
-
+import { components } from "@/sanity/portableTextComponents";
 export const revalidate = 300;
 
 export default async function Music() {
@@ -220,7 +220,10 @@ export default async function Music() {
                 {/* Description with elegant typography */}
                 {music.description && (
                   <div className="prose prose-sm md:prose-lg max-w-none mb-8 text-gray-800">
-                    <PortableText value={music.description} />
+                    <PortableText
+                      value={music.description}
+                      components={components}
+                    />
                   </div>
                 )}
 
