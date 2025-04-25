@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
                         fill="none"
                         className={`w-20 h-20 -mb-3 group-hover:fill-orange-200 group-hover:bg-gray-50 group-hover:border-1 stroke-2 stroke-gray-900 group-over:stroke-gray-700
                           ${
-                            pathname === "/music"
+                            pathname === "/"
                               ? "fill-orange-200 stroke-gray-700"
                               : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
                           }`}
