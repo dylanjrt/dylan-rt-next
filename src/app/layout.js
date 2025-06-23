@@ -4,6 +4,12 @@ import { usePathname } from "next/navigation";
 import "./globals.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Dylan RT | Musician and Designer',
+  description: 'Exploring sound and digital design.'
+};
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
