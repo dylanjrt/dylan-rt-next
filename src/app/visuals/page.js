@@ -7,7 +7,7 @@ export default async function VisualsPage() {
   const videos = await getVideos();
 
   return (
-    <div>
+    <div className="p-4 sm:p-6">
       <VideoGrid videos={videos} />
     </div>
   );

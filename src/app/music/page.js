@@ -81,7 +81,7 @@ export default async function Music() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4 sm:p-6">
       {musicEntries.map((music, index) => {
         // First album gets lime, others get random colors
         const colorObj = brightColors[index % brightColors.length];
@@ -89,7 +89,7 @@ export default async function Music() {
         return (
           <div
             key={music._id}
-            className={`my-8 ${index > 0 ? "mt-24" : ""} max-w-full`}
+            className={`${index > 0 ? "mt-24" : ""} max-w-full`}
           >
             <div
               className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 ${colorObj.selectionBg}`}
