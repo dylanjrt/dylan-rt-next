@@ -64,9 +64,9 @@ export default function ClientNav() {
                       height="148"
                       viewBox="0 0 148 148"
                       fill="none"
-                      className={`group-over:stroke-gray-700 -mb-3 h-20 w-20 stroke-gray-900 stroke-2 group-hover:border-1 group-hover:bg-gray-50 group-hover:fill-orange-200 ${
+                      className={`group-over:stroke-gray-700 -mb-3 h-20 w-20 stroke-gray-900 stroke-2 group-hover:border-1 group-hover:bg-gray-50 group-hover:fill-purple-200 ${
                         pathname === "/"
-                          ? "fill-orange-200 stroke-gray-700"
+                          ? "fill-purple-200 stroke-gray-700"
                           : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
                       }`}
                       xmlns="http://www.w3.org/2000/svg"
@@ -196,9 +196,9 @@ export default function ClientNav() {
                   <div className="group flex flex-col items-center rounded-md p-2">
                     <svg
                       viewBox="0 0 148 148"
-                      className={`group-over:stroke-gray-700 -mb-3 h-20 w-20 stroke-gray-900 stroke-2 group-hover:border-1 group-hover:bg-gray-50 group-hover:fill-orange-200 ${
+                      className={`group-over:stroke-gray-700 -mb-3 h-20 w-20 stroke-gray-900 stroke-2 group-hover:border-1 group-hover:bg-gray-50 group-hover:fill-lime-200 ${
                         pathname === "/music"
-                          ? "fill-orange-200 stroke-gray-700"
+                          ? "fill-lime-200 stroke-gray-700"
                           : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
                       }`}
                       xmlns="http://www.w3.org/2000/svg"
@@ -419,9 +419,9 @@ export default function ClientNav() {
                       height="148"
                       viewBox="0 0 148 148"
                       fill="none"
-                      className={`group-over:stroke-gray-700 -mb-3 h-20 w-20 stroke-gray-900 stroke-2 group-hover:border-1 group-hover:bg-gray-50 group-hover:fill-orange-200 ${
+                      className={`group-over:stroke-gray-700 -mb-3 h-20 w-20 stroke-gray-900 stroke-2 group-hover:border-1 group-hover:bg-gray-50 group-hover:fill-red-200 ${
                         pathname === "/visuals"
-                          ? "fill-orange-200 stroke-gray-700"
+                          ? "fill-red-200 stroke-gray-700"
                           : "fill-[#F6F9F5] group-hover:fill-[#F6F9F5] group-hover:stroke-gray-700"
                       }`}
                       xmlns="http://www.w3.org/2000/svg"
