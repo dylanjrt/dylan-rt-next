@@ -21,7 +21,7 @@ export default function ClientNav() {
                     href="/"
                     className={`text-sm font-semibold transition-colors duration-200 ${
                       pathname === "/"
-                        ? "border-b-2 text-gray-500 italic"
+                        ? "border-b-2 text-purple-500 italic"
                         : "text-gray-900 hover:text-gray-900"
                     }`}
                   >
@@ -31,7 +31,7 @@ export default function ClientNav() {
                     href="/music"
                     className={`text-sm font-semibold transition-colors duration-200 ${
                       pathname === "/music"
-                        ? "border-b-2 text-gray-500 italic"
+                        ? "border-b-2 text-lime-500 italic"
                         : "text-gray-900 hover:text-gray-900"
                     }`}
                   >
@@ -41,7 +41,7 @@ export default function ClientNav() {
                     href="/visuals"
                     className={`text-sm font-semibold transition-colors duration-200 ${
                       pathname === "/visuals"
-                        ? "border-b-2 text-gray-500 italic"
+                        ? "border-b-2 text-red-500 italic"
                         : "text-gray-900 hover:text-gray-900"
                     }`}
                   >
