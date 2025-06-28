@@ -91,7 +91,7 @@ export default function VideoPlayer({
           </span>
         </div>
       )}
-      <div className="rounded overflow-hidden relative">
+      <div className="overflow-hidden relative">
         {isLoading && (
           <div
             className="absolute inset-0 bg-gray-100 animate-pulse"
